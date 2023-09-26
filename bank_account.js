@@ -2,7 +2,6 @@ class BankAccount {
     constructor() {
       this.saldo = 0;
     }
-  
     updateSaldo() {
       const saldoElement = document.getElementById("saldo");
       if (saldoElement) {
@@ -12,22 +11,24 @@ class BankAccount {
     tambahSaldo() {
         while (true) {
             var tambahan = parseFloat(prompt("Masukkan jumlah saldo yang ingin ditambahkan: "));
-            if (!isNaN(tambahan)) {
+            if (!isNaN(tambahan)&& tambahan >= 0) {
                 this.saldo += tambahan;
                 this.updateSaldo();
                 var lanjutkan = window.confirm(`Sisa saldo anda sekarang adalah: ${this.saldo}. Apakah ingin menambahkan? Klik "Cancel" jika tidak ingin lanjut.`);
                 if (!lanjutkan) {
                     break;
                 }
-            } else {
-                alert("Input tidak valid. Masukkan angka yang valid.");
+            } else if (isNaN(tambahan)){
+                alert("Input tidak valid. Masukkan angka yang valid."); 
+            } else if (tambahan <= 0){
+                alert ("masukin lebih dari 0");
             }
         }
     }
     kurangiSaldo() {
         while (true) {
             var pengurangan = parseFloat(prompt("Masukkan jumlah saldo yang ingin dikurangkan: "));
-            if (!isNaN(pengurangan)) {
+            if (!isNaN(pengurangan) && pengurangan >= 0) {
                 if (pengurangan <= saldo) {
                     this.saldo -= pengurangan;
                     this.updateSaldo();
@@ -38,8 +39,10 @@ class BankAccount {
                 } else {
                     alert("Jumlah yang ingin Anda kurangkan melebihi saldo yang tersedia.");
                 }
+            } else if (isNaN(tambahan)){
+                alert("Input tidak valid. Masukkan angka yang valid."); 
             } else {
-                alert("Input tidak valid. Masukkan angka yang valid.");
+                alert ("masukin lebih dari 0");
             }
         }
     }
